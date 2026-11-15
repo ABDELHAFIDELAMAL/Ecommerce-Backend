@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 import com.example.demo.entities.Promotion;
+import com.example.demo.enums.DiscountType;
 import com.example.demo.exceptions.AlReadyExistException;
 import com.example.demo.exceptions.NotFoundException;
 
@@ -13,4 +14,5 @@ public interface IPromotionService {
     void deletePromotion(Long promotionId) throws NotFoundException;
     Promotion updatePromotion(Long promotionId , Promotion promotion) throws NotFoundException, AlReadyExistException;
     List<Promotion> getPromotionsActive();
+    List<Promotion> getPromotionsByDiscountType(DiscountType discountType) ;
 }

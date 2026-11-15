@@ -131,4 +131,9 @@ public class PromotionService implements IPromotionService {
 
         return activePromotions;
     }
+
+    @Override
+    public List<Promotion> getPromotionsByDiscountType(DiscountType discountType) {
+        return promotionRepository.findByDiscountType(discountType);
+    }
 }

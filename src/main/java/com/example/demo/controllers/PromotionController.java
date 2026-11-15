@@ -2,6 +2,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.Promotion;
+import com.example.demo.enums.DiscountType;
 import com.example.demo.response.ApiResponse;
 import com.example.demo.services.IPromotionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,6 +94,20 @@ public class PromotionController {
             );
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), null, false));
+        }
+    }
+
+    @GetMapping("/discountType")
+    public ResponseEntity<ApiResponse> getPromotionsByDiscountType(@RequestParam DiscountType discountType) {
+        try {
+            List<Promotion> data = promotionService.getPromotionsByDiscountType(discountType);
+            return ResponseEntity.ok(
+                    new ApiResponse("Promotions retrieved successfully", data, true)
+            );
+
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body(new ApiResponse(e.getMessage(), null, false));
         }
     }

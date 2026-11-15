@@ -91,7 +91,6 @@ public class ProductService implements IProductService{
                     c.setName(categoryName);
                     return categoryRepository.save(c);
                 });
-
         existing.setName(newName);
         existing.setBrand(newBrand);
         existing.setCategory(category);

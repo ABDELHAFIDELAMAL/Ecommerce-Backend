@@ -52,5 +52,6 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     @Builder.Default
+    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 }
