@@ -43,9 +43,12 @@ public class ProductService implements IProductService{
             throw new IllegalArgumentException("Category name is required");
         }
 
-        String categoryName = product.getCategory().getName();
+        String categoryName = product.getCategory().getName().trim();
 
-        Category category = categoryRepository.findByName(categoryName)
+        Category category = categoryRepository.findAll()
+                .stream()
+                .filter(c -> c.getName().equalsIgnoreCase(categoryName))
+                .findFirst()
                 .orElseGet(() -> {
                     Category c = new Category();
                     c.setName(categoryName);
@@ -54,7 +57,11 @@ public class ProductService implements IProductService{
 
         product.setCategory(category);
         product.setReviewsCount(0);
-        if (productRepository.existsByNameAndBrandAndCategoryName(product.getName(), product.getBrand(), product.getCategory().getName())) {
+
+        if (productRepository.existsByNameAndBrandAndCategoryName(
+                product.getName(),
+                product.getBrand(),
+                category.getName())) {
             throw new AlReadyExistException("Product already exists !!");
         }
 
