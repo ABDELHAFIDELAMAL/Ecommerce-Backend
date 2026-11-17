@@ -112,17 +112,24 @@ public class ProductService implements IProductService{
 
     @Override
     public List<Product> searchProducts(String text) {
+
         List<Product> resultsProducts = new ArrayList<>();
-        for(Product product : productRepository.findAll()){
-           if(product.getName().toLowerCase().contains(text.toLowerCase()) ||
-                   product.getDescription().toLowerCase().contains(text.toLowerCase()) ||
-                   product.getPrice().toString().contains(text.toLowerCase()) ||
-                   product.getBrand().toLowerCase().contains(text.toLowerCase())
-           ){
-               resultsProducts.add(product);
-           }
+
+        String keyword = text.toLowerCase().trim();
+
+        for (Product product : productRepository.findAll()) {
+
+            if (
+                    (product.getName() != null && product.getName().toLowerCase().contains(keyword)) ||
+                            (product.getDescription() != null && product.getDescription().toLowerCase().contains(keyword)) ||
+                            (product.getPrice() != null && product.getPrice().toString().contains(keyword)) ||
+                            (product.getBrand() != null && product.getBrand().toLowerCase().contains(keyword))
+            ) {
+                resultsProducts.add(product);
+            }
         }
-        return resultsProducts ;
+
+        return resultsProducts;
     }
 
     @Override
