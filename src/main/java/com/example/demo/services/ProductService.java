@@ -161,6 +161,11 @@ public class ProductService implements IProductService{
     }
 
     @Override
+    public void deleteAllProducts() {
+        this.productRepository.deleteAll();
+    }
+
+    @Override
     public List<Product> getTopRatedProducts() {
         List<Product> products = productRepository.findAll();
         products.sort((product1 , product2 ) -> Double.compare(product2.getAverageRating().toBigInteger().doubleValue() , product1.getAverageRating().doubleValue() ));
@@ -254,15 +259,12 @@ public class ProductService implements IProductService{
                         "Discount percentage cannot exceed 100%!"
                 );
             }
-
             return price - (price * discount / 100);
         }
 
         if (promotion.getDiscountType() == DiscountType.FIXED_AMOUNT) {
-
             return Math.max(0, price - discount);
         }
-
         throw new IllegalArgumentException("Invalid discount type!");
     }
 

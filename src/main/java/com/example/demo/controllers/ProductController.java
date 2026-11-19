@@ -195,4 +195,15 @@ public class ProductController {
                     .body(new ApiResponse(e.getMessage(), null, false));
         }
     }
+
+    @DeleteMapping(path = "/delete/all")
+    public ResponseEntity<ApiResponse> deleteAllProducts(){
+        try {
+            productService.deleteAllProducts();
+            return ResponseEntity.ok(new ApiResponse("Products deleted successfully", null, true));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null, false));
+        }
+    }
 }
