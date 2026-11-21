@@ -3,6 +3,7 @@ package com.example.demo.services;
 import com.example.demo.entities.Cart;
 import com.example.demo.entities.User;
 import com.example.demo.exceptions.NotFoundException;
+import com.example.demo.repositories.CartItemRepository;
 import com.example.demo.repositories.CartRepository;
 import com.example.demo.repositories.UserRepository;
 import org.aspectj.weaver.ast.Not;
@@ -18,6 +19,8 @@ public class CartService implements ICartService{
 
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private CartItemRepository cartItemRepository ;
     @Autowired
     private UserRepository userRepository;
 
@@ -55,6 +58,11 @@ public class CartService implements ICartService{
         Cart cart = cartRepository.findById(cartId)
                 .orElseThrow(()-> new NotFoundException("Cart not found"));
         return cart.getTotalPrice();
+    }
+
+    @Override
+    public Integer getNumberOfCartItemsByCartId(Long cartId) {
+        return cartItemRepository.countByCartId(cartId);
     }
 
     @Override

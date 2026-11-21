@@ -94,4 +94,14 @@ public class CartController {
                     .body(new ApiResponse(e.getMessage(), null, false));
         }
     }
+    @GetMapping("/countItems/{cartId}")
+    public ResponseEntity<ApiResponse> getNumberOfCartItemsByCartId(@PathVariable Long cartId) {
+        try {
+            Integer count = cartService.getNumberOfCartItemsByCartId(cartId);
+            return ResponseEntity.ok(new ApiResponse("Number of cartItems in cart resieved successfully", count, true));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null, false));
+        }
+    }
 }

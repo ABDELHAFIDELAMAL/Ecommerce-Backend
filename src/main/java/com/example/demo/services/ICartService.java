@@ -12,6 +12,7 @@ public interface ICartService {
     Cart getCartById(Long cartId) throws NotFoundException;
     Cart getCartByUserId(Long userId) throws NotFoundException;
     Double getCartTotal(Long cartId) throws NotFoundException;
+    Integer getNumberOfCartItemsByCartId(Long cartId);
     void clearCart(Long cartId) throws NotFoundException;
     Cart getOrCreateCart(Long userId);
 }
