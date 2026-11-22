@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -44,6 +45,7 @@ public class Review {
             name = "product_id",
             nullable = false
     )
+    @JsonIgnore
     @ToString.Exclude
     private Product product;
 

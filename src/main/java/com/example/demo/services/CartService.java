@@ -69,6 +69,9 @@ public class CartService implements ICartService{
     public void clearCart(Long cartId) throws NotFoundException {
         Cart cart = cartRepository.findById(cartId)
                 .orElseThrow(()-> new NotFoundException("Cart not found"));
+        if(cart.getCartItems().isEmpty()){
+            throw new RuntimeException("Cart is already empty !");
+        }
         cart.getCartItems().clear();
         cart.setTotalPrice(0.0);
         cartRepository.save(cart);

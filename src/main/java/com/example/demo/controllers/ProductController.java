@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.entities.Image;
 import com.example.demo.entities.Product;
+import com.example.demo.entities.Review;
 import com.example.demo.exceptions.NotFoundException;
 import com.example.demo.response.ApiResponse;
 import com.example.demo.services.IProductService;
@@ -9,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -206,4 +209,5 @@ public class ProductController {
                     .body(new ApiResponse(e.getMessage(), null, false));
         }
     }
+
 }

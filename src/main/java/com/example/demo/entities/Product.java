@@ -74,7 +74,6 @@ public class Product {
             orphanRemoval = true
     )
     @Builder.Default
-    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany(mappedBy = "products")
