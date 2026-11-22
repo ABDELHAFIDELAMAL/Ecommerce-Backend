@@ -15,4 +15,5 @@ public interface ICartItemService {
     void clearCartItems(Long cartId);
     void deleteCartItem(Long cartItemId);
     Cart getCartItemByCartAndProduct(Long cartId , Long productId);
+    CartItem updateQuantity(Long cartItemId, Integer quantity);
 }

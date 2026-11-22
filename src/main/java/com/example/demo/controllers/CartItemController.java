@@ -88,6 +88,18 @@ public class CartItemController {
         }
     }
 
+    @PutMapping("/update/quantity/{cartItemId}")
+    public ResponseEntity<ApiResponse> updateQuantity(@PathVariable Long cartItemId, @RequestParam Integer quantity) {
+        try {
+            CartItem updatedItem = cartItemService.updateQuantity(cartItemId, quantity);
+            return ResponseEntity.ok(
+                    new ApiResponse("Cart item quantity updated successfully", updatedItem, true)
+            );
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse(e.getMessage(), null, false));
+        }
+    }
 
     @GetMapping("/cart/{cartId}/product/{productId}")
     public ResponseEntity<ApiResponse> getCartItemByCartAndProduct(@PathVariable Long cartId, @PathVariable Long productId) {
