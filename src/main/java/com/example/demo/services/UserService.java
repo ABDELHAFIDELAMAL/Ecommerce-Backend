@@ -34,7 +34,7 @@ public class UserService implements IUserService {
 
     @Override
     public User getUserByEmail(String email) {
-        return userRepository.findByEmail(email.trim().toLowerCase());
+        return userRepository.findByEmail(email.trim().toLowerCase()).orElseThrow(()->new RuntimeException("User not found"));
     }
 
     @Override

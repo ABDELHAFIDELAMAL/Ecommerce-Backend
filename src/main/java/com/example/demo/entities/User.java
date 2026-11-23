@@ -54,4 +54,5 @@ public class User {
     @Builder.Default
     @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
+
 }
